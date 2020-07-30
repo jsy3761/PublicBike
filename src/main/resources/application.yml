@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: local
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/subway?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: dbsl3761
+
+covid:
+  api:
+    url: http://openapi.seoul.go.kr:8088/737a6a6d756a737937317568694a7a/json/bikeList/
+
+server:
+  port: 8001
