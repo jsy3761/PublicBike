@@ -34,18 +34,17 @@ public class MapController {
     @ResponseBody
     @GetMapping("/location.ajax")
     public List<Row> getLocations(){
-        String json = httpUtil.apiCall(1,1000);
         Gson gson = new Gson();
-        RentBikeStatus rentBikeStatus = gson.fromJson(json,ResponseApi.class).getRentBikeStatus();
-        List<Row> rows = rentBikeStatus.getRow();
 
-        json = httpUtil.apiCall(1001,2000);
-        List<Row> rows2 = gson.fromJson(json,ResponseApi.class).getRentBikeStatus().getRow();
-        rows2.forEach(s -> rows.add(s));
+        List<Row> rows =
+                gson.fromJson(httpUtil.apiCall(1,1000),ResponseApi.class).getRentBikeStatus().getRow();
 
-        json = httpUtil.apiCall(2001,3000);
-        List<Row> rows3= gson.fromJson(json,ResponseApi.class).getRentBikeStatus().getRow();
-        rows3.forEach(s -> rows.add(s));
+        gson.fromJson(httpUtil.apiCall(1001,2000),ResponseApi.class).getRentBikeStatus().getRow()
+                .forEach(s -> rows.add(s));
+
+        gson.fromJson(httpUtil.apiCall(2001,3000),ResponseApi.class).getRentBikeStatus().getRow()
+                .forEach(s -> rows.add(s));
+
         System.out.println(rows.size());
 
         return rows;
